@@ -74,11 +74,19 @@ public class MainActivity extends AppCompatActivity {
                                 if (Client.isIsLogined()) {
                                     Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                                     startActivity(intent);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(MainActivity.this, getResources().getText(R.string.error_login), Toast.LENGTH_SHORT).show();
+                                            btnLogin.setEnabled(true);
+                                        }
+                                    });
                                 } else {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             Toast.makeText(MainActivity.this, getResources().getText(R.string.error_login), Toast.LENGTH_SHORT).show();
+                                            btnLogin.setEnabled(true);
                                         }
                                     });
                                 }
@@ -89,13 +97,13 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         Toast.makeText(MainActivity.this, getResources().getText(R.string.error_cantconnect), Toast.LENGTH_SHORT).show();
+                                        btnLogin.setEnabled(true);
                                     }
                                 });
                             }
                         }
                     }
                     ).start();
-                    btnLogin.setEnabled(true);
                 } else {
                     Toast toast = Toast.makeText(MainActivity.this, getResources().getText(R.string.txt_toast), Toast.LENGTH_SHORT);
                     TextView txtToast = toast.getView().findViewById(android.R.id.message);

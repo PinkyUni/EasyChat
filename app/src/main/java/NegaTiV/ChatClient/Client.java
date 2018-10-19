@@ -36,7 +36,9 @@ public class Client {
             public void run() {
                 try {
                     //InetAddress ipAddress = InetAddress.getByName("192.168.0.101");
-                    InetAddress ipAddress = InetAddress.getByName("easychat.sytes.net");
+                    //InetAddress ipAddress = InetAddress.getByName("easychat.sytes.net");
+                    InetAddress ipAddress = InetAddress.getByName("93.125.49.200");
+
                     clientSocket = new Socket(ipAddress , PORT);
                     OutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
                     InputStream = new ObjectInputStream(clientSocket.getInputStream());
@@ -52,11 +54,19 @@ public class Client {
         });
         th.start();
         try {
-            th.join(1000);
+            th.join(5000);
+            if (th.isAlive()) {
+                th.interrupt();
+                clientSocket.close();
+                InputStream.close();
+                OutputStream.close();
+            }
         }
         catch (InterruptedException e)
         {
             isConnected = false;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -80,7 +90,7 @@ public class Client {
             });
             th.start();
             try {
-                th.join(1000);
+                th.join();
             }
             catch (InterruptedException e)
             {
