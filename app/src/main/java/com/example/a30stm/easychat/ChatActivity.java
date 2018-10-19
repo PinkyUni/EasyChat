@@ -53,6 +53,7 @@ public class ChatActivity extends Activity {
                     if (!isOk)
                     {
                         Toast.makeText(ChatActivity.this, getResources().getText(R.string.error_lostconection), Toast.LENGTH_LONG).show();
+                        Client.reset();
                         finish();
                     }
                 }
