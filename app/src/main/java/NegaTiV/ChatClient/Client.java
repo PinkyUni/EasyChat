@@ -1,5 +1,7 @@
 package NegaTiV.ChatClient;
 
+import android.renderscript.ScriptGroup;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -35,9 +37,8 @@ public class Client {
             @Override
             public void run() {
                 try {
-                    //InetAddress ipAddress = InetAddress.getByName("192.168.0.101");
-                    //InetAddress ipAddress = InetAddress.getByName("easychat.sytes.net");
                     InetAddress ipAddress = InetAddress.getByName("93.125.49.200");
+//                    InetAddress ipAddress = InetAddress.getByName("easychat.sytes.net");
 
                     clientSocket = new Socket(ipAddress , PORT);
                     OutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
