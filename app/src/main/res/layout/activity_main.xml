@@ -37,6 +37,8 @@
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
             android:background="@drawable/edit_background"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
             android:padding="5dp"
             android:inputType="textShortMessage"/>
 
