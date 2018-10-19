@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">EasyChat</string>
+    <string name="authorize_name">YOUR NAME:</string>
+    <string name="btn_login_name">Login</string>
+    <string name="txt_toast">HAHA\nTry again</string>
+    <string name="error_login">Such name is taken</string>
+    <string name="edt_hint">Message</string>
+    <string name="error_lostconection">Lost connection to server</string>
+    <string name="error_cantconnect">Can\'t connect to server, try again</string>
+    </resources>

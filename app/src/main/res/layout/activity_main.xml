@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBack"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/autorize_background">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@string/authorize_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorBtnText"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:textColorLink="@color/colorBtn"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/edit_background"
+            android:padding="5dp"
+            android:inputType="textShortMessage"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/colorBtn"
+            android:text="@string/btn_login_name"
+            android:textColor="@color/colorBtnText"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+</RelativeLayout>
