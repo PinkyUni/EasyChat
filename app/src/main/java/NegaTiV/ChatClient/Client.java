@@ -52,7 +52,7 @@ public class Client {
         });
         th.start();
         try {
-            th.join();
+            th.join(1000);
         }
         catch (InterruptedException e)
         {
@@ -80,7 +80,7 @@ public class Client {
             });
             th.start();
             try {
-                th.join();
+                th.join(1000);
             }
             catch (InterruptedException e)
             {

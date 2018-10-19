@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -20,13 +21,10 @@ import NegaTiV.ChatClient.Client;
 import NegaTiV.ChatClient.ServerMessage;
 import NegaTiV.ChatClient.UpdaterAction;
 
-public class ChatActivity extends Activity {
+public class ChatActivity extends AppCompatActivity {
 
     public ImageButton btnSend;
     public EditText edtMessage;
-    private ChatArrayAdapter chatArrayAdapter;
-//    private ListView listView;
-//    private boolean side = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +34,9 @@ public class ChatActivity extends Activity {
         btnSend = findViewById(R.id.btn_send);
         edtMessage = findViewById(R.id.edt_message);
         ListView listView = findViewById(R.id.chat_area);
-
         final ArrayList<ServerMessage> messages = new ArrayList<>();
         // Создаём адаптер ArrayAdapter, чтобы привязать массив к ListView
         final ChatArrayAdapter adapter = new ChatArrayAdapter(this, messages);
-
         listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         listView.setAdapter(adapter);
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +64,6 @@ public class ChatActivity extends Activity {
                         adapter.notifyDataSetChanged();
                     }
                 });
-
             }
         });
         edtMessage.setTypeface(typeface);
