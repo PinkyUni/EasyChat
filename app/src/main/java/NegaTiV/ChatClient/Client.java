@@ -39,6 +39,7 @@ public class Client {
                 try {
                     InetAddress ipAddress = InetAddress.getByName("93.125.49.200");
 //                    InetAddress ipAddress = InetAddress.getByName("easychat.sytes.net");
+
                     clientSocket = new Socket(ipAddress , PORT);
                     OutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
                     InputStream = new ObjectInputStream(clientSocket.getInputStream());
