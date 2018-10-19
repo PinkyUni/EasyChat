@@ -49,6 +49,7 @@ public class ChatActivity extends AppCompatActivity {
                     if (!isOk)
                     {
                         Toast.makeText(ChatActivity.this, getResources().getText(R.string.error_lostconection), Toast.LENGTH_LONG).show();
+                        Client.reset();
                         finish();
                     }
                 }

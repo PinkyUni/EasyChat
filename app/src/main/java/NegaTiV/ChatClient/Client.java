@@ -56,7 +56,7 @@ public class Client {
         }
         catch (InterruptedException e)
         {
-
+            isConnected = false;
         }
     }
 
@@ -97,8 +97,8 @@ public class Client {
                     return Send(new Message(Message.MsgType.PING, ""));
                 else if (msg.equalsIgnoreCase("/help"))
                     return Send(new Message(Message.MsgType.HELP, ""));
-                else if (msg.equalsIgnoreCase("/quit"))
-                    return Send(new Message(Message.MsgType.QUIT, ""));
+                //else if (msg.equalsIgnoreCase("/quit"))
+                //    return Send(new Message(Message.MsgType.QUIT, ""));
             } else
                 return Send(new Message(Message.MsgType.MSG, msg));
         }
@@ -148,5 +148,10 @@ public class Client {
 
     public static boolean isIsLogined() {
         return isLogined;
+    }
+
+    public static void reset() {
+        Client.isConnected = false;
+        Client.isLogined = false;
     }
 }

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edtName.getText().length() != 0) {
+                    btnLogin.setEnabled(false);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                             });
                             th1.start();
                             try {
-                                th1.join(2000);
+                                th1.join();
 
                             } catch (InterruptedException e) {
                                 System.out.println(e.toString() + "--------------------------------------------");
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                                 });
                                 th2.start();
                                 try {
-                                    th2.join(2000);
+                                    th2.join();
 
                                 } catch (InterruptedException e) {
                                     System.out.println(e.toString() + "--------------------------------------------");
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     ).start();
-
+                    btnLogin.setEnabled(true);
                 } else {
                     Toast toast = Toast.makeText(MainActivity.this, getResources().getText(R.string.txt_toast), Toast.LENGTH_SHORT);
                     TextView txtToast = toast.getView().findViewById(android.R.id.message);
@@ -103,5 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
