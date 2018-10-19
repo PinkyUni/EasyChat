@@ -107,15 +107,17 @@ public class Client {
                     return Send(new Message(Message.MsgType.PING, ""));
                 else if (msg.equalsIgnoreCase("/help"))
                     return Send(new Message(Message.MsgType.HELP, ""));
+                else
+                    return Send(new Message(Message.MsgType.MSG, msg));
                 //else if (msg.equalsIgnoreCase("/quit"))
-                //    return Send(new Message(Message.MsgType.QUIT, ""));
+                    //return Send(new Message(Message.MsgType.QUIT, ""));
             } else
                 return Send(new Message(Message.MsgType.MSG, msg));
         }
         return false;
     }
 
-    private static boolean Send(final Message msg)
+    public static boolean Send(final Message msg)
     {
         final boolean[] res = new boolean[1];
         Thread th = new Thread(new Runnable() {
