@@ -1,6 +1,5 @@
 package com.example.a30stm.easychat;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import NegaTiV.ChatClient.Client;
+import NegaTiV.ChatClient.Message;
 import NegaTiV.ChatClient.ServerMessage;
 import NegaTiV.ChatClient.UpdaterAction;
 
@@ -29,7 +29,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/NovaMono.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/CabinSketch-Regular.ttf");
         setContentView(R.layout.chat_layout);
         btnSend = findViewById(R.id.btn_send);
         edtMessage = findViewById(R.id.edt_message);
@@ -90,32 +90,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
         edtMessage.addTextChangedListener(txt);
-
-
-
-
-//        chatArrayAdapter = new ChatArrayAdapter(getApplicationContext(), R.layout.my_message_layout);
-//        listView.setAdapter(chatArrayAdapter);
-//
-//        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-//        listView.setAdapter(chatArrayAdapter);
-//
-//        //to scroll the list view to bottom on data change
-//        chatArrayAdapter.registerDataSetObserver(new DataSetObserver() {
-//            @Override
-//            public void onChanged() {
-//                super.onChanged();
-//                listView.setSelection(chatArrayAdapter.getCount() - 1);
-//            }
-//        });
     }
-
-//    private boolean sendChatMessage() {
-//        chatArrayAdapter.add(new ChatMessage(side, edtMessage.getText().toString()));
-//        edtMessage.setText("");
-//        side = !side;
-//        return true;
-//    }
 
     @Override
     public void onBackPressed() {
@@ -129,6 +104,13 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Client.Send(new Message(Message.MsgType.QUIT, ""));
+                        Client.reset();
+                    }
+                }).start();
                 finish();
             }
         });

@@ -15,6 +15,7 @@ import NegaTiV.ChatClient.Client;
 
 public class MainActivity extends AppCompatActivity {
     public static String myName;
+    public static Typeface typefaceBold, typefaceRegular;
     public Button btnLogin;
     public EditText edtName;
     public TextView txtTitle;
@@ -23,13 +24,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        typefaceBold = Typeface.createFromAsset(getAssets(), "fonts/CabinSketch-Bold.ttf");
+        typefaceRegular = Typeface.createFromAsset(getAssets(), "fonts/CabinSketch-Regular.ttf");
+
         btnLogin = findViewById(R.id.btn_login);
         edtName = findViewById(R.id.edt_name);
         txtTitle = findViewById(R.id.txt_title);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/NovaMono.ttf");
-        txtTitle.setTypeface(typeface);
-        edtName.setTypeface(typeface);
-        btnLogin.setTypeface(typeface);
+        txtTitle.setTypeface(typefaceBold);
+        edtName.setTypeface(typefaceBold);
+        btnLogin.setTypeface(typefaceBold);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <EditText
             android:id="@+id/edt_message"
@@ -49,15 +49,21 @@
             android:background="@drawable/edit_background"
             android:textColor="@color/colorPrimaryDark"
             android:textColorLink="@color/colorBtn"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/btn_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
+
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+
             android:background="@drawable/btn_background"
             android:scaleType="centerInside"
             android:src="@drawable/nth_send" />
