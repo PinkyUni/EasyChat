@@ -58,14 +58,19 @@ public class Client {
             th.join(5000);
             if (th.isAlive()) {
                 th.interrupt();
-                clientSocket.close();
-                InputStream.close();
-                OutputStream.close();
+                if (clientSocket != null)
+                    clientSocket.close();
+                if (InputStream != null)
+                    InputStream.close();
+                if (OutputStream != null)
+                    OutputStream.close();
+                isConnected = false;
             }
         }
         catch (InterruptedException e)
         {
             isConnected = false;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
