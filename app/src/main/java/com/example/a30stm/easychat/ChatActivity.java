@@ -1,6 +1,5 @@
 package com.example.a30stm.easychat;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -30,7 +29,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/NovaMono.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/CabinSketch-Regular.ttf");
         setContentView(R.layout.chat_layout);
         btnSend = findViewById(R.id.btn_send);
         edtMessage = findViewById(R.id.edt_message);
@@ -91,9 +90,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
         edtMessage.addTextChangedListener(txt);
-
     }
-
 
     @Override
     public void onBackPressed() {

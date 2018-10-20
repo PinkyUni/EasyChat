@@ -45,7 +45,6 @@ public class Client {
                     InputStream = new ObjectInputStream(clientSocket.getInputStream());
                     updater = new Updater(InputStream);
                     isConnected = true;
-
                 }
                 catch (IOException e)
                 {
@@ -115,8 +114,6 @@ public class Client {
                     return Send(new Message(Message.MsgType.HELP, ""));
                 else
                     return Send(new Message(Message.MsgType.MSG, msg));
-                //else if (msg.equalsIgnoreCase("/quit"))
-                    //return Send(new Message(Message.MsgType.QUIT, ""));
             } else
                 return Send(new Message(Message.MsgType.MSG, msg));
         }

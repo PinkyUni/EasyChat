@@ -51,7 +51,7 @@
             android:backgroundTint="@color/colorBtn"
             android:text="@string/btn_login_name"
             android:textColor="@color/colorBtnText"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 </RelativeLayout>
