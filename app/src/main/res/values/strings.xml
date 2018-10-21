@@ -7,7 +7,7 @@
     <string name="edt_hint">Message</string>
     <string name="error_lostconection">Lost connection to server</string>
     <string name="error_cantconnect">Can\'t connect to server, try again</string>
-    <string name="name_alpha">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="name_alpha">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890</string>
 
     <string name="action_users">Users in chat</string>
     <string name="action_commands">Commands</string>

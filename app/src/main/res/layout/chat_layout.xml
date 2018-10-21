@@ -24,7 +24,7 @@
 
         <EditText
             android:id="@+id/edt_message"
-            android:inputType="textFilter|textMultiLine"
+            android:inputType="textMultiLine"
             android:importantForAutofill="no"
             android:hint="@string/edt_hint"
             android:layout_width="0dp"
