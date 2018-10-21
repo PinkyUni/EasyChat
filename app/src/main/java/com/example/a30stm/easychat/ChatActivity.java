@@ -28,6 +28,18 @@ public class ChatActivity extends AppCompatActivity {
 
     public ImageButton btnSend;
     public EditText edtMessage;
+    public ListView listView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.chat_layout);
+        btnSend = findViewById(R.id.btn_send);
+        edtMessage = findViewById(R.id.edt_message);
+        listView = findViewById(R.id.chat_area);
+        edtMessage.setTypeface(MainActivity.typefaceRegular);
+        edtMessage.requestFocus();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,6 +51,64 @@ public class ChatActivity extends AppCompatActivity {
             item.setTitle(s);
         }
         return true;
+    }
+
+    protected void onStart(){
+        super.onStart();
+        final ArrayList<ServerMessage> messages = new ArrayList<>();
+        // Создаём адаптер ArrayAdapter, чтобы привязать массив к ListView
+        final ChatArrayAdapter adapter = new ChatArrayAdapter(this, messages);
+        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        listView.setAdapter(adapter);
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isOk;
+                if (edtMessage.getText().length() > 0) {
+                    isOk = Client.SendMessage(edtMessage.getText().toString());
+                    edtMessage.getText().clear();
+                    if (!isOk)
+                    {
+                        Toast.makeText(ChatActivity.this, getResources().getText(R.string.error_lostconection), Toast.LENGTH_LONG).show();
+                        Client.reset();
+                        finish();
+                    }
+                }
+            }
+        });
+        Client.setUpdaterAction(new UpdaterAction() {
+            @Override
+            public void Update(final ServerMessage msg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        messages.add(0, msg);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+        TextWatcher txt = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (edtMessage.getText().length() != 0) {
+                    btnSend.setImageDrawable(getResources().getDrawable(R.drawable.send));
+                } else {
+                    btnSend.setImageDrawable(getResources().getDrawable(R.drawable.nth_send));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+        edtMessage.addTextChangedListener(txt);
     }
 
     @Override
@@ -107,71 +177,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_layout);
-        btnSend = findViewById(R.id.btn_send);
-        edtMessage = findViewById(R.id.edt_message);
-        ListView listView = findViewById(R.id.chat_area);
-        final ArrayList<ServerMessage> messages = new ArrayList<>();
-        // Создаём адаптер ArrayAdapter, чтобы привязать массив к ListView
-        final ChatArrayAdapter adapter = new ChatArrayAdapter(this, messages);
-        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-        listView.setAdapter(adapter);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isOk;
-                if (edtMessage.getText().length() > 0) {
-                    isOk = Client.SendMessage(edtMessage.getText().toString());
-                    edtMessage.getText().clear();
-                    if (!isOk)
-                    {
-                        Toast.makeText(ChatActivity.this, getResources().getText(R.string.error_lostconection), Toast.LENGTH_LONG).show();
-                        Client.reset();
-                        finish();
-                    }
-                }
-            }
-        });
-        Client.setUpdaterAction(new UpdaterAction() {
-            @Override
-            public void Update(final ServerMessage msg) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        messages.add(0, msg);
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-            }
-        });
-        edtMessage.setTypeface(MainActivity.typefaceRegular);
-        edtMessage.requestFocus();
-        TextWatcher txt = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (edtMessage.getText().length() != 0) {
-                    btnSend.setImageDrawable(getResources().getDrawable(R.drawable.send));
-                } else {
-                    btnSend.setImageDrawable(getResources().getDrawable(R.drawable.nth_send));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
-        edtMessage.addTextChangedListener(txt);
-    }
-
-    @Override
     public void onBackPressed() {
         openQuitDialog();
     }
@@ -203,6 +208,4 @@ public class ChatActivity extends AppCompatActivity {
 
         quitDialog.show();
     }
-
-
 }
