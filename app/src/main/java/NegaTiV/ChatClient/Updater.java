@@ -28,13 +28,14 @@ public class Updater extends Thread{
            try
            {
                msg = (ServerMessage) InputStream.readObject();
-               if (msg.getUserName().equals("SERVER") && (msg.getUserMessage().equals("TEST")) )
+               if ((msg.getUserName().equals("SERVER")) && (msg.getUserMessage().equals("TEST")) )
                {
                    OutputStream.writeObject(new Message(Message.MsgType.TEST, "TEST"));
                    OutputStream.flush();
                }
                else
-                ua.Update(msg);
+                   if (!((msg.getUserName().equals("SERVER")) && (msg.getUserMessage().equals("UNSUCCESSFULLY"))))
+                     ua.Update(msg);
            }
            catch (IOException | ClassNotFoundException e)
            {
