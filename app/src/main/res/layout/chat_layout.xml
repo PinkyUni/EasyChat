@@ -30,6 +30,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
+            android:maxLines="5"
+            android:maxLength="123"
 
             android:layout_marginBottom="12dp"
             android:layout_marginLeft="5dp"
