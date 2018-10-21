@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
+        android:elevation="2dp"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:background="@drawable/authorize_background">
@@ -31,6 +32,7 @@
         <EditText
             android:id="@+id/edt_name"
             android:layout_width="260dp"
+            android:maxLength="20"
             android:layout_height="wrap_content"
             android:layout_margin="14dp"
             android:textColorLink="@color/colorBtn"
@@ -39,8 +41,11 @@
             android:background="@drawable/edit_background"
             android:paddingLeft="8dp"
             android:paddingStart="8dp"
+            android:paddingRight="8dp"
+            android:paddingEnd="8dp"
             android:padding="5dp"
-            android:inputType="textShortMessage"/>
+            android:inputType="textFilter|textMultiLine"
+            android:digits="@string/name_alpha" />
 
         <Button
             android:id="@+id/btn_login"

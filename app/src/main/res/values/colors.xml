@@ -10,4 +10,5 @@
     <color name="colorEditBorder">#d2d1d1</color>
     <color name="colorLayoutBorder">#ece8dd</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorWarning">#e64949</color>
 </resources>

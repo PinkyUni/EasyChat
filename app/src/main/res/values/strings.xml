@@ -7,4 +7,19 @@
     <string name="edt_hint">Message</string>
     <string name="error_lostconection">Lost connection to server</string>
     <string name="error_cantconnect">Can\'t connect to server, try again</string>
+    <!--<string name="msg_alpa">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-.,!?:;()#/*-+\'%$"@</string>-->
+    <string name="name_alpha">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+
+    <string name="action_users">Users in chat</string>
+    <string name="action_commands">Commands</string>
+    <string name="action_about">About&#8230;</string>
+
+    <string name="about_text">Eeeeasy Chat (net) \nby Dubovsky Vladik and Beliatskaya Anya :3</string>
+    <string name="about_title">Developers</string>
+
+    <string name="users_title">Users:</string>
+    <string name="users_list">Тут Владик должен добавить вывод всех юзеров\nда, Владик?</string>
+
+    <string name="commands_title">Commands:</string>
+    <string name="commands_list">Кто то психанул и сказал не делать</string>
     </resources>

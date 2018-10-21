@@ -2,11 +2,14 @@ package com.example.a30stm.easychat;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
@@ -27,9 +30,85 @@ public class ChatActivity extends AppCompatActivity {
     public EditText edtMessage;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.chat_menu, menu);
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem item = menu.getItem(i);
+            SpannableString s = new SpannableString(menu.getItem(i).toString());
+            s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimaryDark)), 0, s.length(), 0);
+            item.setTitle(s);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // получим идентификатор выбранного пункта меню
+        int selectedItem = item.getItemId();
+
+        // Операции для выбранного пункта меню
+        switch (selectedItem) {
+            case R.id.action_users:
+                onClickActionUsers();
+                return true;
+            case R.id.action_commands:
+                onClickActionCommands();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void onClickActionUsers() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle(getResources().getString(R.string.users_title));
+        quitDialog.setMessage(getResources().getString(R.string.users_list));
+
+        quitDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        quitDialog.setNegativeButton("", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
+
+    }
+
+    private void onClickActionCommands() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle(getResources().getString(R.string.commands_title));
+        quitDialog.setMessage(getResources().getString(R.string.commands_list));
+
+        quitDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        quitDialog.setNegativeButton("", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/CabinSketch-Regular.ttf");
         setContentView(R.layout.chat_layout);
         btnSend = findViewById(R.id.btn_send);
         edtMessage = findViewById(R.id.edt_message);
@@ -67,7 +146,7 @@ public class ChatActivity extends AppCompatActivity {
                 });
             }
         });
-        edtMessage.setTypeface(typeface);
+        edtMessage.setTypeface(MainActivity.typefaceRegular);
         edtMessage.requestFocus();
         TextWatcher txt = new TextWatcher() {
             @Override
