@@ -2,15 +2,19 @@ package NegaTiV.ChatClient;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 
 public class Updater extends Thread{
 
    private ObjectInputStream InputStream;
+   private ObjectOutputStream OutputStream;
    private UpdaterAction ua;
 
-   public Updater(ObjectInputStream InputStream)
+   public Updater(ObjectInputStream InputStream, ObjectOutputStream OutputStream)
    {
        this.InputStream = InputStream;
+       this.OutputStream = OutputStream;
    }
 
 
@@ -24,7 +28,13 @@ public class Updater extends Thread{
            try
            {
                msg = (ServerMessage) InputStream.readObject();
-               ua.Update(msg);
+               if (msg.getUserName().equals("SERVER") && (msg.getUserMessage().equals("TEST")) )
+               {
+                   OutputStream.writeObject(new Message(Message.MsgType.TEST, "TEST"));
+                   OutputStream.flush();
+               }
+               else
+                ua.Update(msg);
            }
            catch (IOException | ClassNotFoundException e)
            {

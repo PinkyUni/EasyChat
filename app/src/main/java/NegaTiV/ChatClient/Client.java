@@ -43,7 +43,7 @@ public class Client {
                     clientSocket = new Socket(ipAddress , PORT);
                     OutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
                     InputStream = new ObjectInputStream(clientSocket.getInputStream());
-                    updater = new Updater(InputStream);
+                    updater = new Updater(InputStream, OutputStream);
                     isConnected = true;
                 }
                 catch (IOException e)
@@ -54,7 +54,7 @@ public class Client {
         });
         th.start();
         try {
-            th.join(5000);
+            th.join(4000);
             if (th.isAlive()) {
                 th.interrupt();
                 if (clientSocket != null)
