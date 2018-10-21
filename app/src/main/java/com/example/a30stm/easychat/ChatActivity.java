@@ -39,6 +39,23 @@ public class ChatActivity extends AppCompatActivity {
         listView = findViewById(R.id.chat_area);
         edtMessage.setTypeface(MainActivity.typefaceRegular);
         edtMessage.requestFocus();
+        final ArrayList<ServerMessage> messages = new ArrayList<>();
+        // Создаём адаптер ArrayAdapter, чтобы привязать массив к ListView
+        final ChatArrayAdapter adapter = new ChatArrayAdapter(this, messages);
+        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        listView.setAdapter(adapter);
+        Client.setUpdaterAction(new UpdaterAction() {
+            @Override
+            public void Update(final ServerMessage msg) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        messages.add(0, msg);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -55,11 +72,6 @@ public class ChatActivity extends AppCompatActivity {
 
     protected void onStart(){
         super.onStart();
-        final ArrayList<ServerMessage> messages = new ArrayList<>();
-        // Создаём адаптер ArrayAdapter, чтобы привязать массив к ListView
-        final ChatArrayAdapter adapter = new ChatArrayAdapter(this, messages);
-        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-        listView.setAdapter(adapter);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,18 +86,6 @@ public class ChatActivity extends AppCompatActivity {
                         finish();
                     }
                 }
-            }
-        });
-        Client.setUpdaterAction(new UpdaterAction() {
-            @Override
-            public void Update(final ServerMessage msg) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        messages.add(0, msg);
-                        adapter.notifyDataSetChanged();
-                    }
-                });
             }
         });
         TextWatcher txt = new TextWatcher() {
